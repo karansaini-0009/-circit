@@ -1,0 +1,21 @@
+# Circit — local files that must never be committed
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# data root (created at runtime: CIRCIT_DATA_DIR or ~/Library/Application Support/Circit)
+circit_data/
+data/
+models/
+dist/
+build/
+
+# runtime artifacts
+circit_assistant.lock
+install_log.txt
+READ_ME_FIRST.txt
+.icns
+iconset/
+kokoro-model/
+node_modules/
