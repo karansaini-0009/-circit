@@ -1,0 +1,60 @@
+# Circit — verified dependencies for macOS (Apple Silicon + Intel).
+#
+# Every binary package was verified against PyPI (2026-11-17) to ship real
+# macOS wheels, so `pip install` works on any modern Mac:
+#   PySide6 6.x          macosx_14_0_universal2 (macOS 14+; older macOS
+#                        versions resolve an older 6.x automatically)
+#   sounddevice 0.5.6    macosx universal2 (bundles PortAudio)
+#   psutil 7.x           macosx_11_0 arm64 + x86_64
+#   Pillow 13.x          macosx_11_0 arm64 + x86_64
+#   ctranslate2 4.9.0    macosx_11_0 arm64 + x86_64, CPython 3.10–3.12
+#   onnxruntime / av / tokenizers   macosx arm64 + x86_64
+# Pure-Python packages install identically everywhere:
+#   faster-whisper, pynput, keyring, google-genai, sarvamai, numpy
+#
+# IMPORTANT: use Python 3.11 or 3.12.  faster-whisper's binary backend
+# (ctranslate2) publishes macOS wheels only up to CPython 3.12 — the
+# installer (INSTALL_CIRCUIT_MAC.command) enforces this for you.
+#
+# Replaced relative to the Windows NOVA build (and why):
+#   vosk -> faster-whisper   vosk publishes NO macOS wheels at all (its PyPI
+#                            0.3.45 release ships only Linux/Windows wheels),
+#                            so `pip install vosk` fails on every Mac;
+#                            faster-whisper runs one multilingual model that
+#                            covers English + Hindi + Hinglish offline.
+#   pycaw / comtypes / pywin32 / pywinauto / echoff -> dropped: Windows-only
+#                            packages; on macOS the same features run through
+#                            AppleScript / IOKit / pynput instead.
+
+# GUI (macOS universal2 wheels; resolves an older 6.x on macOS < 14)
+PySide6>=6.6
+
+# Google Gemini
+google-genai>=2.34.0
+
+# Secure credential storage (macOS Keychain)
+keyring>=25.7.0
+
+# Microphone capture (wheel bundles PortAudio)
+sounddevice>=0.5.6
+
+# Offline speech recognition (English + Hindi + Hinglish, one model)
+faster-whisper>=1.0.0
+numpy>=1.26
+
+# System control (cross-platform)
+psutil>=7.2.2
+
+# Screenshots
+Pillow>=13.0.0
+
+# Sarvam Bulbul v3 TTS (Roopa)
+sarvamai>=0.1.41
+
+# --- macOS input control ---------------------------------------------------
+# Keyboard/mouse input (pure Python; pulls pyobjc-framework-ApplicationServices
+# and pyobjc-framework-Quartz on macOS, both needed for input control).
+# The darwin markers document the intent and are always true on a Mac.
+pynput>=1.8.1; sys_platform == "darwin"
+# Frontmost-app detection via NSWorkspace without extra permissions
+pyobjc-framework-Cocoa>=10.3; sys_platform == "darwin"

@@ -1,0 +1,33 @@
+CIRCUIT — START HERE (macOS)
+=============================
+
+You are one double-click away:
+
+    1. Double-click  INSTALL_CIRCUIT_MAC.command
+       (needs Python 3.11 or 3.12 — the installer checks this, explains it,
+        and can install Python 3.12 for you if you have Homebrew)
+
+    2. Say "Yes" to the two permission panes it opens
+       (Accessibility + Microphone — both are needed once)
+
+    3. Double-click the  Circit.command  launcher it puts on your Desktop
+
+Then try saying:
+
+    open youtube and play ajj ki raat song
+    close youtube
+    volume up
+    screenshot
+
+Everything runs on your Mac. The speech recognition is offline; the only
+optional online parts are the Gemini brain (needs a free API key, set it in
+Settings) and the Sarvam/Gemini voices.
+
+Files worth opening:
+    README.md        — what Circit is and how it works
+    README_MAC.md    — permissions, Gatekeeper, sharing the app
+    TROUBLESHOOTING.md — when something does not work
+    TEST_ON_CLOUD_MAC.md — run the test suite on real macOS for free
+    CHANGELOG.md     — what changed versus NOVA
+
+Full technical log of the install: install_log.txt (this folder).
